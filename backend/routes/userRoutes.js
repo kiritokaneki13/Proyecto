@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser } = require('../src/controllers/userController');
+const { registerPersona } = require('../src/controllers/userController');
 
-// Ruta para registrar usuario
-router.post('/register', registerUser);
+router.post('/register', registerPersona);
 
 module.exports = router;
