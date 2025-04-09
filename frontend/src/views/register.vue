@@ -51,6 +51,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -71,27 +72,27 @@ export default {
   methods: {
     async register() {
       try {
+        // Asegurar que id_tipo_persona sea número
+        this.form.id_tipo_persona = Number(this.form.id_tipo_persona);
+
         const response = await axios.post('http://localhost:3000/api/register', this.form);
-        if (response.data.success) {
-          this.message = response.data.message;
-          this.messageClass = 'success';
-        } else {
-          this.message = response.data.message;
-          this.messageClass = 'error';
-        }
+        this.message = response.data.message;
+        this.messageClass = 'success';
+
+        // Esperar un momento y redirigir al login
+        setTimeout(() => {
+          this.$router.push({ name: 'login' });
+        }, 1500);
       } catch (error) {
         console.error('Error al registrar usuario:', error);
         this.message = 'Hubo un error al registrar el usuario.';
         this.messageClass = 'error';
       }
     },
-    goToHome() {
-      this.$router.push('/');
-    },
     goToLogin() {
       this.$router.push({ name: 'login' });
     }
-  },
+  }
 };
 </script>
 

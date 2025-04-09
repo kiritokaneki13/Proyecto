@@ -1,18 +1,24 @@
-// server.js
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const userRoutes = require('./routes/userRoutes'); // Importar las rutas de usuario
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 
-// Middleware para procesar solicitudes JSON
+// Configuración CORS
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+// Middleware
 app.use(bodyParser.json());
 
-
-// Usar las rutas de usuario
+// Rutas
 app.use('/api', userRoutes);
 
-// Iniciar el servidor
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Servidor corriendo en el puerto ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

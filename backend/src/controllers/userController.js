@@ -24,9 +24,9 @@ const registerPersona = (req, res) => {
     (err, results) => {
       if (err) {
         console.error('Error al registrar persona:', err);
-        return res.status(500).json({ message: 'Error al registrar persona' });
+        return res.status(500).json({ success: false, message: 'Error al registrar persona' });
       }
-      res.status(201).json({ message: 'Persona registrada exitosamente', id: results.insertId });
+      res.status(201).json({ success: true, message: 'Persona registrada exitosamente', id: results.insertId });
     }
   );
 };
